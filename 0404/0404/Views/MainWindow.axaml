@@ -1,0 +1,181 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:_0404.ViewModels"
+		xmlns:infrastructure="using:_0404.Infrastructure"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="_0404.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="_0404">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="0,10,20,10"></Setter>
+			<Setter Property="Padding" Value="5,0"></Setter>
+			<Setter Property="FontSize" Value="16"></Setter>
+			<Setter Property="FontWeight" Value="Medium"></Setter>
+		</Style>
+
+		<Style Selector="StackPanel">
+			<Setter Property="Margin" Value="12"></Setter>
+		</Style>
+	</Window.Styles>
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<Color x:Key="WhiteColor">#FFFFFF</Color>
+			<Color x:Key="LightSteelBlue">#B0C4DE</Color>
+			<Color x:Key="LightBlueColor">#66CCCC</Color>
+			<Color x:Key="SandyBrown">#F4A460</Color>
+			<Color x:Key="GreenColor">#33CC33</Color>
+			<Color x:Key="RosyBrown">#BC8F8F</Color>
+			<Color x:Key="BlueColor">#0099CC</Color>
+			<Color x:Key="YellowColor">#FFFF66</Color>
+			<Color x:Key="RedColor">#FF0000</Color>
+		</ResourceDictionary>
+	</Window.Resources>
+
+
+
+		<Grid ShowGridLines="False"
+		RowDefinitions="auto,*,auto"
+		ColumnDefinitions="950,310"
+		Background="{StaticResource WhiteColor}">
+
+			<DockPanel Grid.Row="0"
+					   Grid.ColumnSpan="5"
+					   Background="{StaticResource LightSteelBlue}">
+
+				<TextBlock Foreground="{StaticResource RosyBrown}">Home</TextBlock>
+				<TextBlock Foreground="{StaticResource WhiteColor}">About</TextBlock>
+				<TextBlock Foreground="{StaticResource WhiteColor}">Blogs's Main Topic 1</TextBlock>
+				<TextBlock Foreground="{StaticResource WhiteColor}">Blogs's Main Topic 2</TextBlock>
+				<TextBlock Foreground="{StaticResource WhiteColor}">Blogs's Main Topic 3</TextBlock>
+				<TextBlock Foreground="{StaticResource WhiteColor}">Associated blogs</TextBlock>
+				<TextBlock Foreground="{StaticResource SandyBrown}"
+						   Margin="0,10,40,10"
+						   DockPanel.Dock="Right"
+						   TextAlignment="Right">RSS</TextBlock>
+			</DockPanel>
+
+
+
+
+
+			<ListBox
+			Background ="#FFFFFF"
+			Grid.Row="1"
+			Grid.ColumnSpan="2"
+			ItemsSource="{Binding Blogs}">
+				<ListBox.ItemTemplate>
+
+
+					<DataTemplate >
+
+						<StackPanel>
+							<StackPanel Orientation="Vertical"
+								  Grid.Column="0"
+								  Grid.Row="1">
+
+								<TextBlock Margin= "5, 15" Text="{Binding Title}"> </TextBlock>
+
+								<TextBlock TextWrapping = "Wrap" Margin = "5, 10" Text="{Binding Text}">
+
+								</TextBlock>
+
+
+								<Image Source="{Binding Imagepath, Converter={x:Static infrastructure:BitmapValueConverter.Instance}}"
+									Width="100"
+									HorizontalAlignment="Center" />
+							
+							</StackPanel>
+
+
+
+
+							<DockPanel Grid.Row="2"
+													   Grid.Column="0"
+											   DockPanel.Dock="Bottom"
+													   Background="{StaticResource SecondaryColor}">
+
+								<TextBlock Padding="2,0" Foreground="{StaticResource SandyBrown}"
+								   VerticalAlignment="Center"
+								   Margin="0,10,10,10">Tags:</TextBlock>
+								<ItemsControl ItemsSource="{Binding Tags}">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<StackPanel Orientation="Horizontal" />
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+								</ItemsControl>
+								<StackPanel DockPanel.Dock="Right"
+										Orientation="Horizontal"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Center">
+									<TextBlock Padding="2,0" Foreground="{StaticResource RosyBrown}"
+									   Margin="0,10,20,10">Rate this article</TextBlock>
+									<ComboBox Margin="0, 0, 0, 0" Padding="0" FontSize="14">
+										<ComboBoxItem>1</ComboBoxItem>
+										<ComboBoxItem>2</ComboBoxItem>
+										<ComboBoxItem>3</ComboBoxItem>
+										<ComboBoxItem>4</ComboBoxItem>
+										<ComboBoxItem>5</ComboBoxItem>
+									</ComboBox>
+								</StackPanel>
+							</DockPanel>
+						</StackPanel>
+					</DataTemplate>
+
+
+				</ListBox.ItemTemplate>
+
+			</ListBox>
+
+
+
+
+			<ListBox
+		Background ="#FFFFFF"
+		Grid.Row="1"
+		Grid.Column =" 2"
+		ItemsSource="{Binding News}">
+				<ListBox.ItemTemplate>
+
+					<DataTemplate>
+						<StackPanel Orientation="Vertical"
+                  Grid.Column="1"
+                  Grid.Row="1">
+
+							<TextBlock TextWrapping="Wrap" Margin="0, 42, 0, 0" Text="{Binding Text}">
+							</TextBlock>
+
+							<TextBlock TextAlignment="Right" TextDecorations="Underline" Margin="0, 0, 0, 0">More</TextBlock>
+							<TextBlock TextAlignment="Right" Margin="0, 5, 0, 0"> Yesterday </TextBlock>
+
+							<TextBlock TextWrapping="Wrap" Margin="0, 42, 0, 0" Text="{Binding Text}">
+							</TextBlock>
+							
+							<TextBlock TextAlignment="Right" TextDecorations="Underline" Margin="0, 0, 0, 0">More</TextBlock>
+							<TextBlock TextAlignment="Right" Margin="0, 5, 0, 0">1 week ago</TextBlock>
+
+						</StackPanel>
+
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+
+
+
+		</Grid>
+			
+</Window>
