@@ -159,13 +159,7 @@
 							</TextBlock>
 
 							<TextBlock TextAlignment="Right" TextDecorations="Underline" Margin="0, 0, 0, 0">More</TextBlock>
-							<TextBlock TextAlignment="Right" Margin="0, 5, 0, 0"> Yesterday </TextBlock>
-
-							<TextBlock TextWrapping="Wrap" Margin="0, 42, 0, 0" Text="{Binding Text}">
-							</TextBlock>
-							
-							<TextBlock TextAlignment="Right" TextDecorations="Underline" Margin="0, 0, 0, 0">More</TextBlock>
-							<TextBlock TextAlignment="Right" Margin="0, 5, 0, 0">1 week ago</TextBlock>
+							<TextBlock TextAlignment="Right" Margin="0, 5, 0, 0"> {Binding PublishDate} </TextBlock>
 
 						</StackPanel>
 
